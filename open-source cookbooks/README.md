@@ -1,8 +1,8 @@
 #Microsoft IIS Cookbook:
 cookbooks required: windows, chef_handler
 
-#Tomcat Cookbook
+#Tomcat Cookbook:
 cookbooks required: java, compat_resource
 
-#WAS Liberty Cookbook
+#WAS Liberty Cookbook:
 cookbooks required: java
