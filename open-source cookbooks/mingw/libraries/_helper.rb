@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: tomcat
-# Recipe:: default
+# Cookbook Name:: mingw
+# Library:: _helper
 #
-# Copyright 2010-2016, Chef Software, Inc.
+# Copyright 2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,4 +17,22 @@
 # limitations under the License.
 #
 
-Chef::Log.warn('The default tomcat recipe does nothing. See the readme for information on using the tomcat resources')
+module Mingw
+  module Helper
+    def win_friendly_path(path)
+      path.gsub(::File::SEPARATOR, ::File::ALT_SEPARATOR || '\\') if path
+    end
+
+    def archive_name(source)
+      url = ::URI.parse(source)
+      ::File.basename(::URI.unescape(url.path))
+    end
+
+    def tar_name(source)
+      aname = archive_name(source)
+      ::File.basename(aname, ::File.extname(aname))
+    end
+  end
+end
+
+Chef::Resource.send(:include, Mingw::Helper)

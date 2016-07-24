@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: tomcat
-# Recipe:: default
+# Cookbook Name:: build-essential
+# Attributes:: default
 #
-# Copyright 2010-2016, Chef Software, Inc.
+# Copyright 2008-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,4 +17,5 @@
 # limitations under the License.
 #
 
-Chef::Log.warn('The default tomcat recipe does nothing. See the readme for information on using the tomcat resources')
+default['build-essential']['compile_time'] = false
+default['build-essential']['msys2']['path'] = "#{ENV['SYSTEMDRIVE']}\\msys2"

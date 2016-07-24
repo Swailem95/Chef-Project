@@ -1,6 +1,6 @@
 #
-# Cookbook Name:: tomcat
-# Recipe:: default
+# Cookbook Name:: apt
+# Resource:: preference
 #
 # Copyright 2010-2016, Chef Software, Inc.
 #
@@ -17,4 +17,15 @@
 # limitations under the License.
 #
 
-Chef::Log.warn('The default tomcat recipe does nothing. See the readme for information on using the tomcat resources')
+actions :add, :remove
+default_action :add
+
+state_attrs :glob,
+            :package_name,
+            :pin,
+            :pin_priority
+
+attribute :package_name, kind_of: String, name_attribute: true, regex: [/^([a-z]|[A-Z]|[0-9]|_|-|\.|\*|\+)+$/]
+attribute :glob, kind_of: String
+attribute :pin, kind_of: String
+attribute :pin_priority, kind_of: String

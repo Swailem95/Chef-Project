@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: tomcat
-# Recipe:: default
+# Cookbook Name:: homebrew
+# Recipes:: install_taps
 #
-# Copyright 2010-2016, Chef Software, Inc.
+# Copyright 2015, Chef Software, Inc <legal@chef.io>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,4 +17,8 @@
 # limitations under the License.
 #
 
-Chef::Log.warn('The default tomcat recipe does nothing. See the readme for information on using the tomcat resources')
+include_recipe 'homebrew'
+
+node['homebrew']['taps'].each do |tap|
+  homebrew_tap tap
+end

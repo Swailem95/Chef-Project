@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: tomcat
-# Recipe:: default
+# Cookbook Name:: homebrew
+# Recipes:: install_casks
 #
-# Copyright 2010-2016, Chef Software, Inc.
+# Copyright 2014-2015, Chef Software, Inc <legal@chef.io>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,4 +17,15 @@
 # limitations under the License.
 #
 
-Chef::Log.warn('The default tomcat recipe does nothing. See the readme for information on using the tomcat resources')
+include_recipe 'homebrew'
+
+node['homebrew']['formulas'].each do |formula|
+  if formula.class == Chef::Node::ImmutableMash
+    package formula.fetch(:name) do
+      options '--HEAD' if formula.fetch(:head, false)
+      version formula['version'] if formula.fetch(:version, false)
+    end
+  else
+    package formula
+  end
+end

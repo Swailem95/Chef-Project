@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: tomcat
+# Cookbook Name:: build-essential
 # Recipe:: default
 #
-# Copyright 2010-2016, Chef Software, Inc.
+# Copyright 2008-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,4 +17,8 @@
 # limitations under the License.
 #
 
-Chef::Log.warn('The default tomcat recipe does nothing. See the readme for information on using the tomcat resources')
+# Call the build-essential custom resource
+# This can also be called directly in your cookbooks anywhere you want
+build_essential 'install_packages' do
+  compile_time node['build-essential']['compile_time']
+end

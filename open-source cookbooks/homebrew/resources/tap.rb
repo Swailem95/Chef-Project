@@ -1,8 +1,10 @@
 #
-# Cookbook Name:: tomcat
-# Recipe:: default
+# Author:: Joshua Timberman (<jtimberman@chef.io>)
+# Author:: Graeme Mathieson (<mathie@woss.name>)
+# Cookbook Name:: homebrew
+# Resources:: tap
 #
-# Copyright 2010-2016, Chef Software, Inc.
+# Copyright 2011-2013, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,4 +19,13 @@
 # limitations under the License.
 #
 
-Chef::Log.warn('The default tomcat recipe does nothing. See the readme for information on using the tomcat resources')
+actions :tap, :untap
+default_action :tap
+
+attribute :name,
+          name_attribute: true,
+          kind_of: String,
+          regex: %r{^[\w-]+(?:\/[\w-]+)+$}
+
+attribute :tapped,
+          kind_of: [TrueClass, FalseClass]

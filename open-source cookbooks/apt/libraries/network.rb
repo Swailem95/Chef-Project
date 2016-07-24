@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: tomcat
-# Recipe:: default
+# Cookbook Name:: apt
+# library:: network
 #
-# Copyright 2010-2016, Chef Software, Inc.
+# Copyright 2013-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,4 +17,15 @@
 # limitations under the License.
 #
 
-Chef::Log.warn('The default tomcat recipe does nothing. See the readme for information on using the tomcat resources')
+module ::Apt
+  def interface_ipaddress(host, interface)
+    if interface # rubocop: disable Style/GuardClause
+      addresses = host['network']['interfaces'][interface]['addresses']
+      addresses.select do |ip, data|
+        return ip if data['family'].eql?('inet')
+      end
+    else
+      return host.ipaddress
+    end
+  end
+end

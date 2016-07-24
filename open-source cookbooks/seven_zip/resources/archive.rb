@@ -1,8 +1,9 @@
 #
-# Cookbook Name:: tomcat
-# Recipe:: default
+# Author:: Shawn Neal (<sneal@sneal.net>)
+# Cookbook Name:: seven_zip
+# Resource:: archive
 #
-# Copyright 2010-2016, Chef Software, Inc.
+# Copyright:: 2013, Daptiv Solutions LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,4 +18,11 @@
 # limitations under the License.
 #
 
-Chef::Log.warn('The default tomcat recipe does nothing. See the readme for information on using the tomcat resources')
+default_action :extract
+
+actions :extract
+
+attribute :path, kind_of: String, name_attribute: true
+attribute :source, kind_of: String
+attribute :overwrite, kind_of: [TrueClass, FalseClass], default: false
+attribute :checksum, kind_of: String

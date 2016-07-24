@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: tomcat
+# Cookbook Name:: mingw
 # Recipe:: default
 #
-# Copyright 2010-2016, Chef Software, Inc.
+# Copyright 2016 Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,6 +15,5 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-Chef::Log.warn('The default tomcat recipe does nothing. See the readme for information on using the tomcat resources')
+include_recipe 'seven_zip::default'
