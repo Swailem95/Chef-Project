@@ -17,4 +17,13 @@
 # limitations under the License.
 #
 
-Chef::Log.warn('The default tomcat recipe does nothing. See the readme for information on using the tomcat resources')
+#Chef::Log.warn('The default tomcat recipe does nothing. See the readme for information on using the tomcat resources')
+
+tomcat_install 'tomcat1' do
+  version '8.0.36'
+end
+
+tomcat_service 'tomcat1' do
+  action :start
+  env_vars [{ 'CATALINA_PID' => '/opt/tomcat.pid' }]
+end
