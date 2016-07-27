@@ -1,0 +1,9 @@
+[Unit]
+Description=DB2V<%= node['db2']['version'] %>
+
+[Service]
+ExecStart=<%= node['db2']['db2_home'] %>/bin/db2fmcd
+Restart=always
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,65 @@
+** General Options
+** ---------------------------------------
+PROD                      = EXPRESS_C
+FILE                      = <%= node['db2']['db2_home'] %>
+LIC_AGREEMENT             = ACCEPT
+INTERACTIVE               = YES
+INSTALL_TYPE              = <%= node['db2']['install_type'] %>
+COMP                      = DB2_SAMPLE_DATABASE
+COMP                      = APPLICATION_DEVELOPMENT_TOOLS
+LANG                      = EN
+<% if node['db2']['language'] %>
+LANG                      = <%= node['db2']['language'] %>
+<% end %>
+
+** Instance Creation Settings
+** ---------------------------------------
+INSTANCE                  = <%= node['db2']['instance']['prefix'] %>
+DB2_INST.NAME             = <%= node['db2']['instance']['name'] %>
+<% if node['db2']['instance']['uid'] %>
+DB2_INST.UID              =  <%= node['db2']['instance']['uid'] %>
+<% end %>
+DB2_INST.GROUP_NAME       = <%= node['db2']['instance']['group'] %>
+
+<% if node['db2']['instance']['gid'] %>
+DB2_INST.GID              = <%= node['db2']['instance']['gid'] %>
+<% end %>
+DB2_INST.HOME_DIRECTORY   = <%= node['db2']['instance']['home'] %>
+DB2_INST.PASSWORD         = <%= node['db2']['instance']['password'] %>
+
+DB2_INST.AUTOSTART        = YES
+DB2_INST.START_DURING_INSTALL = YES
+DB2_INST.SVCENAME         = db2c_db2inst1
+DB2_INST.PORT_NUMBER      = <%= node['db2']['instance']['port'] %>
+
+** Fenced User Creation Settings
+** ---------------------------------------
+DB2_INST.FENCED_USERNAME  = <%= node['db2']['instance']['fenced_name'] %>
+<% if node['db2']['instance']['fenced_uid'] %>
+DB2_INST.FENCED_UID       = <%= node['db2']['instance']['fenced_uid'] %>
+<% end %>
+DB2_INST.FENCED_GROUP_NAME = <%= node['db2']['instance']['fenced_group'] %>
+
+<% if node['db2']['instance']['fenced_gid'] %>
+DB2_INST.FENCED_GID       =  <%= node['db2']['instance']['fenced_gid'] %>
+<% end %>
+DB2_INST.FENCED_HOME_DIRECTORY = <%= node['db2']['instance']['fenced_home'] %>
+DB2_INST.FENCED_PASSWORD  =  <%= node['db2']['instance']['fenced_password'] %>
+
+** Administration Server Creation Settings
+** ---------------------------------------
+DAS_USERNAME              = <%= node['db2']['das_name'] %>
+<% if node['db2']['das_uid'] %>
+DAS_UID                   = <%= node['db2']['das_uid'] %>
+<% end %>
+DAS_GROUP_NAME            = <%= node['db2']['das_group'] %>
+<% if node['db2']['das_gid'] %>
+DAS_GID                   = <%= node['db2']['das_gid'] %>
+<% end %>
+DAS_HOME_DIRECTORY        = <%= node['db2']['das_home'] %>
+DAS_PASSWORD              = <%= node['db2']['das_password'] %>
+
+** Global Profile Registry Settings
+** ---------------------------------------
+DB2CODEPAGE               = <%= node['db2']['codepage'] %>
+DB2COMM                   = TCPIP

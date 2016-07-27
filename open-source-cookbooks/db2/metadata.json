@@ -1,0 +1,43 @@
+{
+  "name": "db2",
+  "description": "Installs/Configures db2",
+  "long_description": "# DB2 Express-C cookbook\n\nRequirements\n------------\n#### Chef\n- Chef 12+\n\n#### platforms\n- Red Hat Enterprise Linux 6+\n- Ubuntu 12.04+\n- SUSE 12\n\n#### Cookbooks\n- selinux\n- ntp\n\nAttributes\n----------\n\n#### required attributes\n<table>\n  <tr>\n    <th>Key</th>\n    <th>Type</th>\n    <th>Default</th>\n  </tr>\n  <tr>\n    <td><tt>['db2']['installer_url']</tt></td>\n    <td>String</td>\n    <td><tt>nil</tt></td>\n  </tr>\n</table>\n\n#### installer\n<table>\n  <tr>\n    <th>Key</th>\n    <th>Type</th>\n    <th>Default</th>\n  </tr>\n  <tr>\n    <td><tt>['db2']['version']</tt></td>\n    <td>String</td>\n    <td><tt>11.1</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['installer_log']</tt></td>\n    <td>String</td>\n    <td><tt>/tmp/db2setup.log</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['nlpack_url']</tt></td>\n    <td>String</td>\n    <td><tt>nil</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['language']</tt></td>\n    <td>String</td>\n    <td><tt>nil</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['codepage']</tt></td>\n    <td>Integer</td>\n    <td><tt>1208</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['install_type']</tt></td>\n    <td>String</td>\n    <td><tt>CUSTOM</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['sample_database']</tt></td>\n    <td>Boolean</td>\n    <td><tt>false</tt></td>\n  </tr>\n</table>\n\n#### instance\n<table>\n  <tr>\n    <td><tt>['db2']['instance']['prefix']</tt></td>\n    <td>String</td>\n    <td><tt>DB2_INST</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['instance']['name']</tt></td>\n    <td>String</td>\n    <td><tt>db2inst1</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['instance']['uid']</tt></td>\n    <td>String</td>\n    <td><tt>nil</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['instance']['group']</tt></td>\n    <td>String</td>\n    <td><tt>db2iadm1</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['instance']['gid']</tt></td>\n    <td>String</td>\n    <td><tt>nil</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['instance']['home']</tt></td>\n    <td>String</td>\n    <td><tt>'/home/' + ['db2']['instance']['name']</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['instance']['password']</tt></td>\n    <td>String</td>\n    <td><tt>db2inst1</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['instance']['port']</tt></td>\n    <td>Integer</td>\n    <td><tt>50000</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['instance']['fenced_name']</tt></td>\n    <td>String</td>\n    <td><tt>db2fenc1</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['instance']['fenced_uid']</tt></td>\n    <td>String</td>\n    <td><tt>nil</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['instance']['fenced_group']</tt></td>\n    <td>String</td>\n    <td><tt>db2fsdm1</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['instance']['fenced_gid']</tt></td>\n    <td>String</td>\n    <td><tt>nil</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['instance']['fenced_home']</tt></td>\n    <td>String</td>\n    <td><tt>'/home/' + ['db2']['instance']['fenced_name']</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['instance']['fenced_password']</tt></td>\n    <td>String</td>\n    <td><tt>db2fenc1</tt></td>\n  </tr>\n</table>\n\n#### DB2 Administration Server(DAS) user\n<table>\n  <tr>\n    <td><tt>['db2']['das_name']</tt></td>\n    <td>String</td>\n    <td><tt>dasusr1</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['das_uid']</tt></td>\n    <td>String</td>\n    <td><tt>nil</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['das_group']</tt></td>\n    <td>String</td>\n    <td><tt>dasadm1</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['das_gid']</tt></td>\n    <td>String</td>\n    <td><tt>nil</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['das_home']</tt></td>\n    <td>String</td>\n    <td><tt>'/home/' + ['db2']['das_name']</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['das_password']</tt></td>\n    <td>String</td>\n    <td><tt>dasusr1</tt></td>\n  </tr>\n</table>\n\n#### first database\nif you want to create a database, you'll need to set the 'name' attribute.\n<table>\n  <tr>\n    <td><tt>['db2']['database']['name']</tt></td>\n    <td>String</td>\n    <td><tt>nil</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['database']['codeset']</tt></td>\n    <td>String</td>\n    <td><tt>UTF-8</tt></td>\n  </tr>\n  <tr>\n    <td><tt>['db2']['database']['territory']</tt></td>\n    <td>String</td>\n    <td><tt>JP</tt></td>\n  </tr>\n</table>\n\nUsage\n------------\n\n#### Berksfile\n    source \"https://api.berkshelf.com/\"\n    \n    cookbook \"db2\"  , github: \"kayu28/chef-db2expc\"\n",
+  "maintainer": "kayu28",
+  "maintainer_email": "YOUR_EMAIL",
+  "license": "Apache 2.0",
+  "platforms": {
+  },
+  "dependencies": {
+    "selinux": ">= 0.0.0",
+    "ntp": ">= 0.0.0"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "0.1.0",
+  "source_url": "",
+  "issues_url": "",
+  "privacy": false,
+  "chef_versions": [
+
+  ],
+  "ohai_versions": [
+
+  ],
+  "gems": [
+
+  ]
+}
