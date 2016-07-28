@@ -16,17 +16,18 @@
 # limitations under the License.
 
 #<> User name under which the server is installed and runs.
-default[:wlp][:user] = "wlp"
+default[:wlp][:user] = "root"
 
 #<> Group name under which the server is installed and runs.
-default[:wlp][:group] = "wlpadmin"
+default[:wlp][:group] = "root"
 
 #<
 # Use the `java` cookbook to install Java. If Java is installed using a
 # different method override it to `false`, in which case, the Java executables
 # must be available on the __PATH__. 
 #>
-default[:wlp][:install_java] = true
+#set to false by default because java is preinstalled on RHEL
+default[:wlp][:install_java] = false
 
 #<> Base installation directory.
 default[:wlp][:base_dir] = "/opt/was/liberty"
@@ -35,7 +36,7 @@ default[:wlp][:base_dir] = "/opt/was/liberty"
 default[:wlp][:user_dir] = nil
 
 #<> Installation method. Set it to 'archive' or 'zip'.
-default[:wlp][:install_method] = 'archive'
+default[:wlp][:install_method] = 'zip'
 
 #<
 #  Location of the Yaml file containing the URLs of the 'archive' install file
@@ -64,7 +65,7 @@ default[:wlp][:archive][:extended][:url] = nil
 default[:wlp][:archive][:extras][:url] = nil
 
 #<> Controls whether the extended archive is downloaded and installed.
-default[:wlp][:archive][:extended][:install] = true
+default[:wlp][:archive][:extended][:install] = false
 
 #<> Controls whether the extras archive is downloaded and installed.
 default[:wlp][:archive][:extras][:install] = false
@@ -76,13 +77,13 @@ default[:wlp][:archive][:extras][:base_dir] = "#{node[:wlp][:base_dir]}/extras"
 #  Accept license terms when doing archive-based installation. 
 #  Must be set to `true` or the installation fails. 
 #>
-default[:wlp][:archive][:accept_license] = false
+default[:wlp][:archive][:accept_license] = true
 
 #<
 #  URL location for a zip file containing Liberty profile installation files.
 #  Must be set if `node[:wlp][:install_method]` is set to `zip`.
 #>
-default[:wlp][:zip][:url] = nil
+default[:wlp][:zip][:url] = "https://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/wasdev/downloads/wlp/8.5.5.9/wlp-webProfile7-8.5.5.9.zip"
 
 #<
 #  Defines a basic server configuration when creating server instances using
