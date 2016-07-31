@@ -26,9 +26,9 @@ wlp_user = node[:wlp][:user]
 wlp_group = node[:wlp][:group]
 wlp_base_dir = node[:wlp][:base_dir]
 
-execute "allow permission" do
-  command "echo 'wlp  ALL=(ALL:ALL) ALL' >> /etc/sudoers"
-end
+#execute "allow permission" do
+#  command "echo 'wlp  ALL=(ALL:ALL) ALL' >> /etc/sudoers"
+#end
 
 # Don't create 'root' group - allows execution as root
 if wlp_group != "root"
