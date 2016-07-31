@@ -16,10 +16,10 @@
 # limitations under the License.
 
 #<> User name under which the server is installed and runs.
-default[:wlp][:user] = "wlp"
+default[:wlp][:user] = "root"
 
 #<> Group name under which the server is installed and runs.
-default[:wlp][:group] = "wlpadmin"
+default[:wlp][:group] = "root"
 
 #<
 # Use the `java` cookbook to install Java. If Java is installed using a
