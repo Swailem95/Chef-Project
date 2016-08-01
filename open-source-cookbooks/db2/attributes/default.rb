@@ -16,9 +16,10 @@
 
 # default attributes
 default['db2']['working_dir']                 = ::File.join(Chef::Config[:file_cache_path], 'db2')
-default['db2']['version']                     = '11.1'
+default['db2']['version']                     = '10.5'
 default['db2']['installer_url']               = nil
-default['db2']['installer_file']              = 'v' + node['db2']['version'] + '_linuxx64_expc.tar.gz'
+default['db2']['installer_path']			  = '/home/Documetns/DB2_NL_Pack_10.5.0.3_Linux_x86-64.tar.gz'
+default['db2']['installer_file']              = 'v' + node['db2']['version'] + '_linuxx64.tar.gz'
 default['db2']['installer_log']               = '/tmp/db2setup.log'
 default['db2']['nlpack_url']                  = nil
 default['db2']['nlpack_file']                 = 'v' + node['db2']['version'] + '_linuxx64_nlpack.tar.gz'

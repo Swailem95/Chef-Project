@@ -14,8 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-unless node['db2']['installer_url']
-  Chef::Application.fatal!("The installer_url attribute is required.")
+if node['db2']['installer_url']
+	sourcePath = node['db2']['installer_url']
+elsif node['db2']['installer_path']
+	sourcePath = "file://#{node['db2']['installer_path']}"
+else
+	Chef::Application.fatal!("You must set the installer_url or the installer_path.")
 end
 
 installer = node['db2']['installer_file']
@@ -70,7 +74,7 @@ directory "#{workdir}" do
   action :create
 end
 
-template "#{workdir}/db2expc.rsp" do
+template "#{workdir}/db2nlpack.rsp" do
   owner 'root'
   group 'root'
   mode  '0644'
@@ -83,13 +87,13 @@ end
 
 execute 'extract-nlpack' do
   action :nothing
-  command "tar zxf #{workdir}/#{nlpack} -C #{workdir}/expc"
+  command "tar zxf #{workdir}/#{nlpack} -C #{workdir}/nlpack"
   only_if { File.exists?("#{workdir}/#{nlpack}") }
 end
 
 execute 'install' do
   action :nothing
-  command "#{workdir}/expc/db2setup -r #{workdir}/db2expc.rsp -l #{node['db2']['installer_log']}"
+  command "#{workdir}/nlpack/db2setup -r #{workdir}/db2nlpack.rsp -l #{node['db2']['installer_log']}"
 end
 
 if node['db2']['nlpack_url']
@@ -102,14 +106,14 @@ if node['db2']['nlpack_url']
 end
 
 remote_file File.join(workdir, installer) do
-  source node['db2']['installer_url']
-  owner 'root'
-  group 'root'
-  mode  '0755'
-  not_if "test -e #{workdir}/#{installer}"
-  notifies :run, "execute[extract]", :immediately
-  notifies :run, "execute[extract-nlpack]", :immediately
-  notifies :run, "execute[install]", :immediately
+	source sourcePath
+	owner 'root'
+	group 'root'
+	mode  '0755'
+	not_if "test -e #{workdir}/#{installer}"
+	notifies :run, "execute[extract]", :immediately
+	notifies :run, "execute[extract-nlpack]", :immediately
+	notifies :run, "execute[install]", :immediately
 end
 
 directory "#{workdir}" do
