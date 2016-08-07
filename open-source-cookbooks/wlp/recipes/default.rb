@@ -17,18 +17,15 @@
 
 =begin
 #<
-Installs WebSphere Application Server Liberty Profile. Liberty profile can be 
+Installs WebSphere Application Server Liberty Profile. Liberty profile can be
 installed using jar archive files, or from a zip file based on the `node[:wlp][:install_method]` setting.
 #>
 =end
 
+##get user, group and base directory from attributes
 wlp_user = node[:wlp][:user]
 wlp_group = node[:wlp][:group]
 wlp_base_dir = node[:wlp][:base_dir]
-
-#execute "allow permission" do
-#  command "echo 'wlp  ALL=(ALL:ALL) ALL' >> /etc/sudoers"
-#end
 
 # Don't create 'root' group - allows execution as root
 if wlp_group != "root"
@@ -68,7 +65,7 @@ if wlp_user_dir
       mode "0755"
       recursive true
     end
-    
+
     # Set WLP_USER_DIR in etc/server.env
     wlp_server_env "set_user_dir" do
       properties "WLP_USER_DIR" => node[:wlp][:user_dir]
