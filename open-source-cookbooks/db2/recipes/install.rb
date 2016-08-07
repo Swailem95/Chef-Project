@@ -26,6 +26,15 @@ installer = node['db2']['installer_file']
 nlpack    = node['db2']['nlpack_file']
 workdir   = node['db2']['working_dir']
 
+case node['db2']['product']
+when 'DB2_SERVER_EDITION'
+	templateName = 'db2server.rsp'
+	setupDir = 'server'
+when 'EXPRESS_EDITION'
+	templateName = 'db2exp.rsp'
+	setupDir = 'express'
+end
+
 case node['platform_family']
 when 'rhel'
   include_recipe 'selinux::disabled'
@@ -74,7 +83,7 @@ directory "#{workdir}" do
   action :create
 end
 
-template "#{workdir}/db2nlpack.rsp" do
+template "#{workdir}/#{templateName}" do
   owner 'root'
   group 'root'
   mode  '0644'
@@ -93,7 +102,7 @@ end
 
 execute 'install' do
   action :nothing
-  command "#{workdir}/nlpack/db2setup -r #{workdir}/db2nlpack.rsp -l #{node['db2']['installer_log']}"
+  command "#{workdir}/#{setupDir}/db2setup -r #{workdir}/#{templateName} -l #{node['db2']['installer_log']}"
 end
 
 if node['db2']['nlpack_url']
