@@ -17,20 +17,23 @@
 
 =begin
 #<
-Installs WebSphere Application Server Liberty Profile from a zip file. 
+Installs WebSphere Application Server Liberty Profile from a zip file.
 This recipe is called by the `default` recipe and should not be used directly.
 #>
 =end
 
+##get path to zip file from attributes
 install_dir = "#{node[:wlp][:base_dir]}/wlp"
 
+##get filename
 zip_uri = ::URI.parse(node[:wlp][:zip][:url])
 zip_filename = ::File.basename(zip_uri.path)
+
 
 if zip_uri.scheme == "file"
   zip_file = zip_uri.path
 else
-  zip_file = "#{Chef::Config[:file_cache_path]}/#{zip_filename}" 
+  zip_file = "#{Chef::Config[:file_cache_path]}/#{zip_filename}"
   remote_file zip_file do
     source node[:wlp][:zip][:url]
     user node[:wlp][:user]
@@ -39,11 +42,12 @@ else
   end
 end
 
+##extract zipfile to a certain location if it doesnt already exist
 package 'unzip'
 
 execute "install #{zip_filename}" do
   cwd node[:wlp][:base_dir]
-  command "unzip #{zip_file}" 
+  command "unzip #{zip_file}"
   user node[:wlp][:user]
   group node[:wlp][:group]
   not_if { ::File.exists?(install_dir) }
