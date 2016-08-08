@@ -9,9 +9,9 @@ Alternatively, if you do not want to use the IBMCookbook and just want to instal
 ####Examples:
 
 ```bash
-bash run_script.sh  #will install all the cookbooks included in the  IBMCookbook default recipe
+$ bash run_script.sh  #will install all the cookbooks included in the  IBMCookbook default recipe
 ```
 
 ```bash
-bash run_script.sh tomcat #will only install tomcat
+$ bash run_script.sh tomcat #will only install tomcat
 ```
