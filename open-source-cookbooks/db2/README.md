@@ -40,6 +40,11 @@ You need to set installer_url attribute or installer_path attribute of db2 insta
   </tr>
 </table>
 
+#### product
+You can set product attribute to one of this values:
+- DB2_SERVER_EDITION
+- EXPRESS_C
+
 #### installer
 <table>
   <tr>
