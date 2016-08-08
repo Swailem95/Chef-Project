@@ -6,7 +6,7 @@ If you run the script without passing it any arguments, it will automatically ru
 
 Alternatively, if you do not want to use the IBMCookbook and just want to install a single cookbook, just run the script and pass it the name of the cookbook you want to run.
 
-Examples:
+####Examples:
 
 ```bash
 bash run_script.sh  #will install all the cookbooks included in the  IBMCookbook default recipe
