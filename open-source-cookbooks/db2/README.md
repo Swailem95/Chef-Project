@@ -18,7 +18,7 @@ Attributes
 ----------
 
 #### required attributes
-You need to set Download URL or Local Path to db2 installer file, not both.
+You need to set installer_url attribute or installer_path attribute of db2 installer file, not both.
 <table>
   <tr>
     <th>Key</th>
@@ -27,14 +27,14 @@ You need to set Download URL or Local Path to db2 installer file, not both.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['db2']['installer_path']</tt></td>
-    <td>Local Path of the installation file</td>
+    <td><tt>['db2']['installer_url']</tt></td>
+    <td>DB2 download URL</td>
     <td>String</td>
     <td><tt>nil</tt></td>
   </tr>
   <tr>
-    <td><tt>['db2']['installer_url']</tt></td>
-    <td>DB2 download URL</td>
+    <td><tt>['db2']['installer_path']</tt></td>
+    <td>Local Path of the installation file</td>
     <td>String</td>
     <td><tt>nil</tt></td>
   </tr>
