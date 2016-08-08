@@ -31,12 +31,6 @@ Attributes
     <td>String</td>
     <td><tt>nil</tt></td>
   </tr>
-  <tr>
-    <td><tt>['db2']['installer_url']</tt></td>
-    <td>DB2 download url</td>
-    <td>String</td>
-    <td><tt>nil</tt></td>
-  </tr>
 </table>
 
 #### installer
@@ -221,3 +215,8 @@ if you want to change the DB2 edition, you'll need to change the 'product' attri
     <td><tt>DB2_SERVER_EDITION</tt></td>
   </tr>
 </table>
+
+#### Berksfile
+    source "https://api.berkshelf.com/"
+    
+    cookbook "db2"  , github: "kayu28/chef-db2expc"

@@ -14,10 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-installer = node['db2']['installer_file']
-nlpack    = node['db2']['nlpack_file']
-workdir   = node['db2']['working_dir']
-
 if node['db2']['installer_url']
 	sourcePath = node['db2']['installer_url']
 elsif node['db2']['installer_path']
@@ -25,6 +21,11 @@ elsif node['db2']['installer_path']
 else
 	Chef::Application.fatal!("You must set the installer_url or the installer_path.")
 end
+
+installer = node['db2']['installer_file']
+nlpack    = node['db2']['nlpack_file']
+workdir   = node['db2']['working_dir']
+
 
 # Managing product edition
 case node['db2']['product']
