@@ -18,12 +18,13 @@ installer = node['db2']['installer_file']
 nlpack    = node['db2']['nlpack_file']
 workdir   = node['db2']['working_dir']
 
+# Use URL or local path to the db2 installer
 if node['db2']['installer_url']
 	sourcePath = node['db2']['installer_url']
 elsif node['db2']['installer_path']
 	sourcePath = "file://#{node['db2']['installer_path']}"
 else
-	Chef::Application.fatal!("You must set the installer_url or the installer_path.")
+	Chef::Application.fatal!("installer_url attribute or installer_path attribute is required.")
 end
 
 # Managing product edition
@@ -36,7 +37,7 @@ when 'EXPRESS_EDITION'
 	setupDir = 'express'
 end
 
-# download and install required libraries
+# Download and install required libraries
 case node['platform_family']
 when 'rhel'
   include_recipe 'selinux::disabled'
@@ -118,7 +119,7 @@ if node['db2']['nlpack_url']
   end
 end
 
-# action extract and install
+# Download/Copy from provided URL or from local path the db2 installer 
 remote_file File.join(workdir, installer) do
 	source sourcePath
 	owner 'root'

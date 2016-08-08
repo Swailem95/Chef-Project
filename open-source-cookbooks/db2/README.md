@@ -18,6 +18,7 @@ Attributes
 ----------
 
 #### required attributes
+You need to set Download URL or Local Path to db2 installer file, not both.
 <table>
   <tr>
     <th>Key</th>
@@ -27,13 +28,13 @@ Attributes
   </tr>
   <tr>
     <td><tt>['db2']['installer_path']</tt></td>
-    <td>Path of the installation file</td>
+    <td>Local Path of the installation file</td>
     <td>String</td>
     <td><tt>nil</tt></td>
   </tr>
   <tr>
     <td><tt>['db2']['installer_url']</tt></td>
-    <td>DB2 download url</td>
+    <td>DB2 download URL</td>
     <td>String</td>
     <td><tt>nil</tt></td>
   </tr>
@@ -45,6 +46,11 @@ Attributes
     <th>Key</th>
     <th>Type</th>
     <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt>['db2']['product']</tt></td>
+    <td>String</td>
+    <td><tt>DB2_SERVER_EDITION</tt></td>
   </tr>
   <tr>
     <td><tt>['db2']['version']</tt></td>
@@ -74,7 +80,7 @@ Attributes
   <tr>
     <td><tt>['db2']['install_type']</tt></td>
     <td>String</td>
-    <td><tt>CUSTOM</tt></td>
+    <td><tt>TYPICAL</tt></td>
   </tr>
   <tr>
     <td><tt>['db2']['sample_database']</tt></td>
@@ -208,16 +214,5 @@ if you want to create a database, you'll need to set the 'name' attribute.
     <td><tt>['db2']['database']['territory']</tt></td>
     <td>String</td>
     <td><tt>JP</tt></td>
-  </tr>
-</table>
-
-Usage
-------------
-if you want to change the DB2 edition, you'll need to change the 'product' attribute.
-<table>
-  <tr>
-    <td><tt>default['db2']['product']</tt></td>
-    <td>String</td>
-    <td><tt>DB2_SERVER_EDITION</tt></td>
   </tr>
 </table>

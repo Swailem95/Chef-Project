@@ -267,19 +267,19 @@ INSTANCE                  = <%= node['db2']['instance']['prefix'] %>        ** c
 ** not locked and that the password has not expired. IBM DB2 pureScale Feature
 ** users must specify a name that is unique across the IBM DB2 pureScale
 ** implementation.
-DB2_INST.NAME             = <%= node['db2']['instance']['name'] %>        ** char(8)  no spaces, no upper case letters
+DB2_INST.NAME             = <%= node['db2']['instance']['name'] %>          ** char(8)  no spaces, no upper case letters
 
 ** The UID will be generated if the keyword is not specified - highly
 ** recommended.
 *DB2_INST.UID             =                 ** Unsigned integer
-DB2_INST.GROUP_NAME       = <%= node['db2']['instance']['group'] %>        ** char(30) no spaces
+DB2_INST.GROUP_NAME       = <%= node['db2']['instance']['group'] %>         ** char(30) no spaces
 
 ** Use a generated GID if no value provided - highly recommended.
 <% if node['db2']['instance']['gid'] %>
-DB2_INST.GID             = <%= node['db2']['instance']['gid'] %>         ** Unsigned integer
+DB2_INST.GID             = <%= node['db2']['instance']['gid'] %>            ** Unsigned integer
 <% end %>
-DB2_INST.HOME_DIRECTORY  = <%= node['db2']['instance']['home'] %>                ** char(64) no spaces. Valid for root installation only
-DB2_INST.PASSWORD        = <%= node['db2']['instance']['password'] %> ** Valid for root installation only
+DB2_INST.HOME_DIRECTORY  = <%= node['db2']['instance']['home'] %>           ** char(64) no spaces. Valid for root installation only
+DB2_INST.PASSWORD        = <%= node['db2']['instance']['password'] %>       ** Valid for root installation only
 
 ** If PURESCALE is selected or installed, the default instance type will be
 ** DSF.
@@ -296,7 +296,7 @@ DB2_INST.AUTOSTART        = YES             ** YES or NO
 ** AUTOSTART keyword above.
 DB2_INST.START_DURING_INSTALL = YES         ** YES or NO. Default is YES.
 *DB2_INST.SVCENAME        = db2c_db2inst1   ** BLANK or char(14). Reserved for root installation only
-*DB2_INST.PORT_NUMBER     = 50000           ** 1024 - 65535, Reserved for root installation only
+DB2_INST.PORT_NUMBER      = <%= node['db2']['instance']['port'] %>           ** 1024 - 65535, Reserved for root installation only
 
 ** The ports in range [FCM_PORT_NUMBER, FCM_PORT_NUMBER+MAX_LOGICAL_NODES] are
 ** reserved during the installation. Valid for root installation only. If your
@@ -407,17 +407,17 @@ DB2_INST.FENCED_USERNAME  = <%= node['db2']['instance']['fenced_name'] %>       
 <% if node['db2']['instance']['fenced_uid'] %>
 DB2_INST.FENCED_UID       = <%= node['db2']['instance']['fenced_uid'] %>
 <% end %>
-DB2_INST.FENCED_GROUP_NAME = <%= node['db2']['instance']['fenced_group'] %>       ** char(30)  no spaces
+DB2_INST.FENCED_GROUP_NAME = <%= node['db2']['instance']['fenced_group'] %>      ** char(30)  no spaces
 
 ** If no value is provided for FENCED_GID keyword, the DB2 installer will
 ** generate one for you. This is highly recommended.
 <% if node['db2']['instance']['fenced_gid'] %>
 DB2_INST.FENCED_GID       =  <%= node['db2']['instance']['fenced_gid'] %>
 <% end %>
-DB2_INST.FENCED_HOME_DIRECTORY = <%= node['db2']['instance']['fenced_home'] %>          ** char(64) no spaces
+DB2_INST.FENCED_HOME_DIRECTORY = <%= node['db2']['instance']['fenced_home'] %>   ** char(64) no spaces
 
 ** This FENCED_PASSWORD is required if the fenced user ID is a new user
-DB2_INST.FENCED_PASSWORD = <%= node['db2']['instance']['fenced_password'] %>                 ** char(8)
+DB2_INST.FENCED_PASSWORD = <%= node['db2']['instance']['fenced_password'] %>     ** char(8)
 
 ** Text Search Configuration
 ** -------------------------
@@ -690,13 +690,17 @@ DB2_INST.FENCED_PASSWORD = <%= node['db2']['instance']['fenced_password'] %>    
 ** Valid for root installation only. User IDs managed by NIS/NIS+ are not
 ** supported. If an existing ID is used, make sure it is not locked and its
 ** password has not expired.
-*DAS_USERNAME             =                 ** char(8)  no spaces, no upper case letters
-*DAS_UID                  =                 ** use db2 generated UID if no values provided(highly recommended) OR a valid unsign int
-*DAS_GROUP_NAME           =                 ** char(30)  no spaces
-*DAS_GID                  =                 ** use db2 generated GID if no values provided(highly recommended) OR a valid unsign int
-*DAS_HOME_DIRECTORY       =                 ** char(64) no spaces
-*DAS_PASSWORD             =                 ** char(8)
-*DAS_SMTP_SERVER          =                 ** char(64) no spaces
+DAS_USERNAME              = <%= node['db2']['das_name'] %>               ** char(8)  no spaces, no upper case letters
+<% if node['db2']['das_uid'] %>
+DAS_UID                   = <%= node['db2']['das_uid'] %>                ** use db2 generated UID if no values provided(highly recommended) OR a valid unsign int
+<% end %>
+DAS_GROUP_NAME            = <%= node['db2']['das_group'] %>              ** char(30)  no spaces
+<% if node['db2']['das_gid'] %>
+DAS_GID                   = <%= node['db2']['das_gid'] %>                ** use db2 generated GID if no values provided(highly recommended) OR a valid unsign int
+<% end %>
+DAS_HOME_DIRECTORY        = <%= node['db2']['das_home'] %>               ** char(64) no spaces
+DAS_PASSWORD              = <%= node['db2']['das_password'] %>           ** char(8)
+*DAS_SMTP_SERVER          =                                              ** char(64) no spaces
 
 ** Global Profile Registry Settings
 ** --------------------------------
