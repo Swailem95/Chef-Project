@@ -1,4 +1,4 @@
-# DB2 Express-C cookbook
+# DB2 cookbook
 
 Requirements
 ------------
@@ -18,18 +18,32 @@ Attributes
 ----------
 
 #### required attributes
+You need to set installer_url attribute or installer_path attribute of db2 installer file, not both.
 <table>
   <tr>
     <th>Key</th>
     <th>Type</th>
+    <th>Description</th>
     <th>Default</th>
   </tr>
   <tr>
     <td><tt>['db2']['installer_url']</tt></td>
+    <td>DB2 download URL</td>
+    <td>String</td>
+    <td><tt>nil</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['db2']['installer_path']</tt></td>
+    <td>Local Path of the installation file</td>
     <td>String</td>
     <td><tt>nil</tt></td>
   </tr>
 </table>
+
+#### product
+You can set product attribute to one of this values:
+- DB2_SERVER_EDITION
+- EXPRESS_C
 
 #### installer
 <table>
@@ -39,9 +53,14 @@ Attributes
     <th>Default</th>
   </tr>
   <tr>
+    <td><tt>['db2']['product']</tt></td>
+    <td>String</td>
+    <td><tt>DB2_SERVER_EDITION</tt></td>
+  </tr>
+  <tr>
     <td><tt>['db2']['version']</tt></td>
     <td>String</td>
-    <td><tt>11.1</tt></td>
+    <td><tt>10.5.0.3</tt></td>
   </tr>
   <tr>
     <td><tt>['db2']['installer_log']</tt></td>
@@ -66,7 +85,7 @@ Attributes
   <tr>
     <td><tt>['db2']['install_type']</tt></td>
     <td>String</td>
-    <td><tt>CUSTOM</tt></td>
+    <td><tt>TYPICAL</tt></td>
   </tr>
   <tr>
     <td><tt>['db2']['sample_database']</tt></td>
@@ -202,11 +221,3 @@ if you want to create a database, you'll need to set the 'name' attribute.
     <td><tt>JP</tt></td>
   </tr>
 </table>
-
-Usage
-------------
-
-#### Berksfile
-    source "https://api.berkshelf.com/"
-    
-    cookbook "db2"  , github: "kayu28/chef-db2expc"
