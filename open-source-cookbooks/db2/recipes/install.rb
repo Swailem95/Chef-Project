@@ -30,10 +30,10 @@ end
 # Managing product edition
 case node['db2']['product']
 when 'DB2_SERVER_EDITION'
-	templateName = 'db2server.rsp'
+	templateName = 'db2server.rsp.erb'
 	setupDir = 'server'
 when 'EXPRESS_EDITION'
-	templateName = 'db2exp.rsp'
+	templateName = 'db2exp.rsp.erb'
 	setupDir = 'express'
 end
 
